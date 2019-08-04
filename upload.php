@@ -36,7 +36,7 @@ if ($uploadOk == 0) {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
         // Navigate to the display page, targeting the uploaded file
-        header('Location: /display.php?file=' . $timeStamp);
+        header('Location: /display.php?'. FILE_HEADER . '=' . $timeStamp);
         exit();
     } else {
         echo "Sorry, there was an error uploading your file.";

@@ -9,13 +9,11 @@
 <body>
     <?php 
         include('./util.php');
-        if (isset($_GET['file'])) {
-            $fileName = $_GET['file'];
-            $filePath = createFilePath($fileName);
-             echo $filePath;
-        } else {
-            echo "File not passed?";
-        }
+        $fileName = isset($_GET[FILE_HEADER]) ? $_GET[FILE_HEADER] : 'DNE';
+        $filePath = createFilePath($fileName);
+
+        echo $fileName;
+
     ?>
 
 
