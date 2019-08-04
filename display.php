@@ -8,11 +8,19 @@
 </head>
 <body>
     <?php 
+        include('./util.php');
         if (isset($_GET['file'])) {
-             echo $_GET['file'];
+            $fileName = $_GET['file'];
+            $filePath = createFilePath($fileName);
+             echo $filePath;
         } else {
             echo "File not passed?";
         }
     ?>
+
+
+    <br>
+
+    <a href="/">Home</a>
 </body>
 </html>

@@ -1,16 +1,18 @@
 <?php
 
+include('./util.php');
 
-$target_dir = "files/";
+$target_dir = FILE_DIR;
 
 // Ensure the file storage directory is set
 if (!file_exists($target_dir)) {
-    mkdir('$target_dir');
+    mkdir($target_dir);
 }
 
 $date = new DateTime();
+$timeStamp = $date->getTimestamp();
+$target_file = createFilePath($timeStamp);
 // basename($_FILES["fileToUpload"]["name"])
-$target_file = $target_dir . $date->getTimestamp() . '.csv';
 $uploadOk = 1;
 $fileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 $fileSize = $_FILES['fileToUpload']['size'];
@@ -34,7 +36,7 @@ if ($uploadOk == 0) {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
         // Navigate to the display page, targeting the uploaded file
-        header('Location: /display.php?file=' . $target_file);
+        header('Location: /display.php?file=' . $timeStamp);
         exit();
     } else {
         echo "Sorry, there was an error uploading your file.";
