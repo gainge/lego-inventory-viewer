@@ -9,8 +9,9 @@
 </head>
 <body>
     <?php 
-        function buildLegoComponent($count, $image) {
+        function buildLegoComponent($count, $image, $partID) {
             echo "<div class='item'>";
+            echo    "<p class='id'>" . $partID . "</p>";
             echo    "<img src='" . $image . "' />";
             echo     "<p>" . $count . "</p>";
             echo "</div>";
@@ -37,14 +38,24 @@
                 $row++;
 
                 if ($row == 0) continue;
-                if (sizeof($line) <= 1) break;
+                if (sizeof($line) <= 1) {
+                    echo "<div class='break'></div>";
+
+                    if (sizeof($line) == 1) {
+                        echo "<h1>" . $line[0] . "</h1>";
+                        echo "<div class='break'></div>";
+                    }
+
+                    continue;
+                }
 
                 // otherwise, we write out the component
 
+                $partID = $line[1];
                 $count = $line[2];
                 $image = $line[7];
 
-                buildLegoComponent($count, $image);
+                buildLegoComponent($count, $image, $partID);
             }
 
             // Write end of container div
@@ -60,6 +71,6 @@
 
     <br>
 
-    <a href="/">Home</a>
+    <a class='no-print' href="/">Home</a>
 </body>
 </html>
